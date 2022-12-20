@@ -14,6 +14,8 @@ public class Student : Entity
         Email = email;
         Address = address;
         _subscriptions = new List<Subscription>();
+
+        AddNotifications(name, document, email);
     }
 
     public Name Name { get; private set; }
@@ -24,7 +26,7 @@ public class Student : Entity
 
     public void AddSubscription(Subscription subscription) 
     {
-        foreach(var sub in Subscriptions)
+        foreach (var sub in Subscriptions)
             sub.Inactivate();
 
         _subscriptions.Add(subscription);
