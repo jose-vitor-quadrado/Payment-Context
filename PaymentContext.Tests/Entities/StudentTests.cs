@@ -16,8 +16,8 @@ public class StudentTests
 
         // var payment = new PaypalPayment();
 
-        //var name = new Name("Teste", "Teste");
-        //foreach (var not in name.Notifications)
-        //    not.Message;
+        // var name = new Name("Teste", "Teste");
+        // foreach (var not in name.Notifications)
+        //     not.Message;
     }
 }
