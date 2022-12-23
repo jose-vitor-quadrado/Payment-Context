@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PaymentContext.Domain.Enums;
 using PaymentContext.Domain.Entities;
 using PaymentContext.Domain.ValueObjects;
 
@@ -7,17 +7,54 @@ namespace PaymentContext.Tests.Entities;
 [TestClass]
 public class StudentTests
 {
-    [TestMethod]
-    public void AddSubscription() 
+    private readonly Name _name;
+    private readonly Document _document;
+    private readonly Email _email;
+    private readonly Address _address;
+    private readonly Student _student;
+
+    public StudentTests()
     {
-        // var subscription = new Subscription(null);
-        // var student = new Student("Andre", "Baltieri", "192394014", "andre@balta.io");
-        // student.AddSubscription(subscription);
+        _name = new Name("Bruce", "Wayne");
+        _document = new Document("34855372099", EDocumentType.CPF);
+        _email = new Email("batman@dc.com");
+        _address = new Address("Veigar", "123", "Void", "Runeterra", "GP", "SR", "151617");
+        _student = new Student(_name, _document, _email, _address);
+    }
 
-        // var payment = new PaypalPayment();
+    [TestMethod]
+    public void ShouldReturnErrorWhenHadActiveSubscription() 
+    {
+        var subscription = new Subscription(null);
+        var payment = new PaypalPayment("12345678", DateTime.Now, DateTime.Now.AddDays(5), 10, 10, "WAYNE CORP", _document, _address, _email);
 
-        // var name = new Name("Teste", "Teste");
-        // foreach (var not in name.Notifications)
-        //     not.Message;
+        subscription.AddPayment(payment); 
+
+        _student.AddSubscription(subscription);
+        _student.AddSubscription(subscription);
+
+        Assert.IsFalse(_student.IsValid);
+    }
+
+    [TestMethod]
+    public void ShouldReturnErrorWhenSubscriptionHasNoPayment()
+    {
+        var subscription = new Subscription(null);
+        _student.AddSubscription(subscription);
+
+        Assert.IsFalse(_student.IsValid);
+    }
+
+    //[TestMethod]
+    //public void ShouldReturnSuccessWhenAddSubscription()
+    //{
+    //    var subscription = new Subscription(null);
+    //    var payment = new PaypalPayment("12345678", DateTime.Now, DateTime.Now.AddDays(5), 10, 10, "WAYNE CORP", _document, _address, _email);
+
+    //    subscription.AddPayment(payment);
+
+    //    _student.AddSubscription(subscription);
+
+    //    Assert.IsTrue(_student.IsValid);
     }
 }
