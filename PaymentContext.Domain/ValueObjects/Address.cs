@@ -23,7 +23,7 @@ public class Address : ValueObject
         Country = country;
         ZipCode = zipCode;
 
-        AddNotification(new Contract<Notification>()
+        AddNotifications(new Contract<Notification>()
             .Requires()
             .IsLowerOrEqualsThan(Street, 3, "Address.Street", "A rua deve conter pelo menos 3 caracteres"));
     }
