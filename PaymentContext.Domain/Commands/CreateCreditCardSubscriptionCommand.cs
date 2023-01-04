@@ -1,4 +1,5 @@
 ﻿using PaymentContext.Domain.Enums;
+using PaymentContext.Shared.Commands;
 
 namespace PaymentContext.Domain.Commands;
 
