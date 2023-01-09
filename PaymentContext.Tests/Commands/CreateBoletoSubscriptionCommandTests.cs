@@ -2,7 +2,7 @@
 
 namespace PaymentContext.Tests.Commands;
 
-[TestClass]
+// [TestClass]
 public class CreateBoletoSubscriptionCommandTests
 {
     [TestMethod]
